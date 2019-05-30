@@ -1,0 +1,155 @@
+#!/bin/bash
+
+# Script of Model Creation Template-based for Data Science
+#
+# Main usage: ./create-model new-project-name
+#
+# Author: Manoel Vilela <manoel.neto@neoway.com.br>
+
+PROGRAM=$(basename "$0")
+SCRIPT_PATH=$(readlink -f "$0")
+TEMPLATE_PROJECT_PATH=$(dirname "$SCRIPT_PATH")
+TEMPLATE_FOLDER="$TEMPLATE_PROJECT_PATH/template/"
+AUTHOR=$(git config --global user.name)
+EMAIL=$(git config --global user.email)
+PLACEHOLDER_REGEX="<@[a-zA-Z]+>"
+
+# Info function variable
+info () {
+    printf "\e[0;32m[+]\e[0m "
+
+    echo "$@"
+}
+
+
+attention () {
+    printf "\e[0;36m[!]\e[0m "
+
+    echo "$@"
+}
+
+usage () {
+    echo "usage: $PROGRAM [-dihu] new-project-name"
+    echo
+    echo "PARAMETERS"
+    echo "    -h, --help     Show this help and exit"
+    echo "    -d, --debug    Debug mode for development"
+    echo "    -i, --install  Install this script into ~/.local/bin as symlink"
+    echo "    -u, --update   Update the template"
+    exit 1
+}
+
+# For debugging purposes
+search_placeholders () {
+    grep -R -E "$PLACEHOLDER_REGEX" "$TEMPLATE_FOLDER"
+}
+
+# type: str -> str
+# Translate invalid Python identifiers common characters
+# from project names, like hyphens and spaces to underscore.
+# Ex.: composite-indicator -> composite_indicator
+normalize_name () {
+    local name="$1"
+    echo "$name" | tr '-' '_' | tr ' ' '_'
+}
+
+debug() {
+    info "DEBUG MODE!"
+    echo "Variables"
+    echo "AUTHOR=$AUTHOR"
+    echo "EMAIL=$EMAIL"
+    echo "project_path=$project_path"
+    echo "TEMPLATE_PROJECT_PATH=$TEMPLATE_PROJECT_PATH"
+    echo "TEMPLATE_FOLDER=$TEMPLATE_FOLDER"
+    info "NORMALIZE PROJECT NAME"
+    echo "$project_name -> $model_name"
+    info "SEARCH PLACEHOLDERS"
+    search_placeholders
+    exit 0
+}
+
+install () {
+    mkdir -p ~/.local/bin
+    info INSTALLING SCRIPT INTO ~/.local/bin
+    ln -s -f -v "$SCRIPT_PATH" ~/.local/bin/
+    exit 0
+}
+
+update() {
+    info UPDATE PROJECT TEMPLATE BASE
+    cd "$TEMPLATE_PROJECT_PATH" || exit 1
+    git pull
+    exit 0
+}
+
+search_replace () {
+    local search
+    local replace
+    search="$1"
+    replace="$2"
+    info "$search -> $replace"
+    # shellcheck disable=SC2038
+    find . -type f | xargs sed -i "s/$search/$replace/g"
+}
+
+argparsing () {
+    # if first argument is as parameter, don't parse it
+    if [[ "$1" != "-"* ]]; then
+        project_path=$(readlink -f "$(dirname "$1")")
+        project_name=$(basename "$1")
+        model_name=$(normalize_name "$project_name")
+    fi
+
+    # default to help usage if no param is passed
+    if [[ -z "$1" ]]; then
+        usage
+    fi
+
+    # vanilla argument parsing
+    for arg in "$@"; do
+        if [[ $arg == -h || $arg == --help ]]; then
+            usage
+        elif [[ $arg == -d || $arg == --debug ]]; then
+            debug "$@"
+        elif [[ $arg == -i || $arg == --install ]]; then
+            install
+        elif [[ $arg == -u || $arg == --update ]]; then
+            update
+        fi;
+    done
+
+}
+
+main () {
+    argparsing "$@"
+    new_project=$project_path/$project_name
+    info "COPYING BASE TEMPLATE TO: $new_project"
+    mkdir -p "$project_path"
+    cp -R "$TEMPLATE_FOLDER" "$new_project"
+    cd "$new_project" || exit 1
+    info "RENAME MODEL DIRECTORY"
+    info "RENAME PLACEHOLDERS"
+    search_replace "<@model>" "$model_name"
+    search_replace "<@project>" "$project_name"
+    search_replace "<@author>" "$AUTHOR"
+    search_replace "<@email>" "$EMAIL"
+    # Exceptions
+    sed -i "s/model_name/$model_name/g" setup.py docs/hack/docs.sh
+    sed -i "s/project/$project_name/g" Makefile
+    sed -i "s/model_name/$model_name/g" \
+        model_name/main.py \
+        model_name/config.py \
+        Makefile \
+        Dockerfile
+
+    mv model_name "$model_name"
+
+    info "INITIALIZING GIT REPOSITORY"
+    mkdir -p workspace/{data,models}
+    git init
+    attention "CREATE NEW GIT PROJECT AT SOME GIT HOSTING SERVICE"
+    attention "EVAL: git remote add origin <remote repository address>"
+    info "DONE!"
+}
+
+main "$@"

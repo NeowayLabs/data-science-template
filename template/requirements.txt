@@ -1,0 +1,24 @@
+## Essential packages: software dependency
+fire>=0.1.3
+
+## Data analysis
+# pandas
+# numpy
+
+## Dev packages: development enviroment
+# NOTE: mark with #dev to ignore in setup.py
+
+# Testing
+pytest #dev
+pytest-mypy #dev
+pytest-cov #dev
+flake8 #dev
+bandit #dev
+
+# Cloud Storage
+#awscli #dev
+
+## Data analysis
+# jupyter
+# matplotlib
+# seaborn
