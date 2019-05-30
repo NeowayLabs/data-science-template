@@ -27,7 +27,7 @@ Make sure that **docker** is installed.
 
 Clone the project from the analytics Models repo.
 ```
-git clone git@github.com:NeowayLabs/data-science-template.git
+git clone https://github.com/<@github_username>/<@project>.git
 cd <@project>
 ```
 
