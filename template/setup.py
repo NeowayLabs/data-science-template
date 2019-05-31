@@ -1,14 +1,9 @@
 from setuptools import setup, find_packages
 import os
 from os import path
-import model_name
 
 # Model package name
-NAME = model_name.__name__
-
-# Default package dir
-PKG_DIR = path.basename(path.dirname(model_name.__file__))
-
+NAME = 'model_name'
 # Current Version
 VERSION = os.environ.get('APP_VERSION', 'latest')
 
@@ -37,10 +32,7 @@ setup(
     packages=find_packages(exclude=("tests", "docs")),
     entry_points={
         'console_scripts': [
-            '{name}={dir}.main:cli'.format(
-                name=NAME,
-                dir=PKG_DIR
-            )
+            '{name}={name}.main:cli'.format(name=NAME)
         ],
     },
     # external packages as dependencies

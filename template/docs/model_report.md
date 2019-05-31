@@ -7,10 +7,10 @@ Mark which tasks have been performed
 - [ ] **Summary**: you have included a description, usage, output,  accuracy and metadata of your model.
 - [ ] **Pre-processing**: you have applied pre-processing to your data and this function is reproducible to new datasets.
 - [ ] **Feature selection**: you have performed feature selection while modeling.
-- [ ] **Modeling dataset creation**: you have well-defined and reproducible code to generate a modeling dataset that reproduces the behaviour of the target dataset. This pipeline is also applicable to generate the deploy dataset.
+- [ ] **Modeling dataset creation**: you have well-defined and reproducible code to generate a modeling dataset that reproduces the behavior of the target dataset. This pipeline is also applicable to generate the deploy dataset.
 - [ ] **Model selection**: you have chosen a suitable model according to the project specification.
 - [ ] **Model validation**: you have validated your model according to the project specification.
-- [ ] **Model optimization**: you have defined functions to optimize hyperparameters and they are reproducible.
+- [ ] **Model optimization**: you have defined functions to optimize hyper-parameters and they are reproducible.
 - [ ] **Peer-review**: your code and results have been verified by your colleagues and pre-approved by them.
 - [ ] **Acceptance**: this model report has been accepted by the Data Science Manager. State name and date.
 
@@ -42,13 +42,13 @@ output_example2 = ['pizza','churrascaria']
 ```
 
 #### Metadata
-> Your model's metada should be provided in a machine-interpetrable
+> Your model's metada should be provided in a machine-readable
 > format (e.g. a json file) and include the following items:
 
 * a brief description: this model predicts the type of a restaurant
   cuisine
 * a measure of accuracy applicable for use of the model in other
-  setupes (if applicable): standard deviation, accuracy, error matrix.
+  setups (if applicable): standard deviation, accuracy, error matrix.
 * model version
 * author
 * date created
@@ -89,7 +89,7 @@ not readily available in the features store
 ## Modeling
 > Describe the type of model used.
 
-A `RandomForestClassifier` from `scikit-learn` was used. This model serves our purpose to perform multilabel classification and has shown satisfactory performance.
+A `RandomForestClassifier` from `scikit-learn` was used. This model serves our purpose to perform multi-label classification and has shown satisfactory performance.
 
 ### Model selection
 > Describe any model selection that has been performed.
@@ -107,7 +107,7 @@ Both a `DecisionTreeClassifier` and `RadomForestClassifier` have been used. The 
 ### Model optimization
 > Motivate your choice of hyperparameters and report the training results.
 
-* The hyperparameters `alpha`, `omega`, `beta` were optimized using PSO.
+* The hyper-parameters `alpha`, `omega`, `beta` were optimized using PSO.
 
 Provide a figure with the training decades if applicable.
 

@@ -42,7 +42,7 @@
 
 
 #### Subsetting
-> Also provide a list of subsetting variables and how they related to the target population.
+> Also provide a list of sub-setting variables and how they related to the target population.
 
 | Subsetting variable  | Selection rule                               |
 |----------------------|----------------------------------------------|
@@ -60,10 +60,10 @@ output_example2 = ['pizza','churrascaria']
 ```
 
 #### Metadata
-> Your model's metada should be provided in a machine-interpetrable format (e.g. a json file) and include the following items:
+> Your model's metada should be provided in a machine-readable format (e.g. a json file) and include the following items:
 
 * a brief description: this model predicts the type of a restaurant cuisine
-* a measure of accuracy applicable for use of the model in other setupes (if applicable): standard deviation, accuracy, error matrix.
+* a measure of accuracy applicable for use of the model in other setups (if applicable): standard deviation, accuracy, error matrix.
 * model version
 * author
 * date created
@@ -72,7 +72,7 @@ output_example2 = ['pizza','churrascaria']
 ### Problem type
 > Describe to which Data Science problem type(s) this project relates to with a brief motivation.
 
-"Since the objective is to assign one or more labels to an entity, this problem is a multilabel classification. It is also unsupervised since no observed data is available."
+"Since the objective is to assign one or more labels to an entity, this problem is a multi-label classification. It is also unsupervised since no observed data is available."
 
 ## Solution architecture [Should this be here? Shouldn't we define a common archtecture?]
 > This section describes the architecture of your solution. It should clarify:
@@ -89,7 +89,7 @@ Provide a schematic describing how your model will consume data, evaluate the mo
 
 | Limitation                              | Likelihood | Loss                               | Contingency                        |
 |-----------------------------------------|------------|------------------------------------|------------------------------------|
-| Inexistence of observed data            | 100%       | not possible to validate the model | Create a data partnership with VR. |
+| Nonexistence of observed data           | 100%       | not possible to validate the model | Create a data partnership with VR. |
 | High false positives rate for `m_regex` | 30%        | lack of quality and trust          | Fine tuning of filters.            |
 
 
@@ -102,10 +102,10 @@ Provide a schematic describing how your model will consume data, evaluate the mo
 ### Related and observed datasets [OPTIONAL - may not apply]
 > List any related and observed datasets that can be used for your project.
 
-| table name                | observed? | description                                             | Why relevant                                | Update frequency |
-|---------------------------|-----------|---------------------------------------------------------|---------------------------------------------|------------------|
-| data_science_sp.vr_ticket | yes       | contains 8M payouts made at VR-accepting establishments | Can be used to validate model               | once             |
-| data_science.geo          | no        | contains features of a given region                     | can help create geo features to the problem | yearly           |
+| table name                | observed? | description                                             | Why relevant                                            | Update frequency |
+|---------------------------|-----------|---------------------------------------------------------|---------------------------------------------------------|------------------|
+| data_science_sp.vr_ticket | yes       | contains 8M payouts made at VR-accepting establishments | Can be used to validate model                           | once             |
+| data_science.geo          | no        | contains features of a given region                     | can help create geolocalization features to the problem | yearly           |
 
 
 ### Data partners [OPTIONAL - may not apply]
