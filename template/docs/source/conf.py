@@ -23,7 +23,7 @@ def convert(word):
 
 # -- Project information -----------------------------------------------------
 
-project = convert('test-env')
+project = convert('model_name')
 copyright = str(datetime.datetime.now().year) + ', Vitor Hugo'
 author = 'Vitor Hugo'
 
