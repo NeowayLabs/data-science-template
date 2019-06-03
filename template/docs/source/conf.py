@@ -24,8 +24,8 @@ def convert(word):
 # -- Project information -----------------------------------------------------
 
 project = convert('model_name')
-copyright = str(datetime.datetime.now().year) + ', Vitor Hugo'
-author = 'Vitor Hugo'
+copyright = str(datetime.datetime.now().year) + ', Neoway'
+author = 'Neoway'
 
 # The full version, including alpha/beta/rc tags
 # TODO: update version here
