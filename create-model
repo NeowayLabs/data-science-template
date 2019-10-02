@@ -12,19 +12,19 @@ readlinkf () {
     # which does not work in iOS (Mac).
     TARGET_FILE=$1
 
-    cd "$(dirname $TARGET_FILE)"
-    TARGET_FILE="$(basename $TARGET_FILE)"
+    cd "$(dirname "$TARGET_FILE")" || exit 1
+    TARGET_FILE="$(basename "$TARGET_FILE")"
 
     while [ -L "$TARGET_FILE" ]
     do
         TARGET_FILE="$(readlink "$TARGET_FILE")"
-        cd "$(dirname $TARGET_FILE)"
+        cd "$(dirname "$TARGET_FILE")" || exit 1
         TARGET_FILE="$(basename "$TARGET_FILE")"
     done
 
     PHYS_DIR="$(pwd -P)"
     RESULT=$PHYS_DIR/$TARGET_FILE
-    echo $RESULT    
+    echo "$RESULT"
 }
 
 PROGRAM=$(basename "$0")
