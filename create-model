@@ -161,6 +161,9 @@ main () {
         Makefile \
         Dockerfile
 
+    # Delete backup files
+    find . -name "*.bak" -type f -delete
+
     mv model_name "$model_name"
 
     info "INITIALIZING GIT REPOSITORY"
