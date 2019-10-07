@@ -14,6 +14,8 @@ cp docs/*.md docs/source/md/
 sed -i.bak '0,/model_name/s//API/' docs/source/apidoc/modules.rst
 # Show package's name in the home page
 sed -i.bak '0,/project/s//model_name/' docs/source/index.rst
+# Delete backup files
+find . -name "*.bak" -type f -delete
 # Generate html docs
 make -C docs/ html
 # Clear temp files at source/md directory
